@@ -4,8 +4,8 @@ $ErrorActionPreference = "Stop"
 # Enable TLSv1.2 for compatibility with older clients for current session
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$DownloadURL1 = 'https://github.com/JKINFORMATICASHOP/office/commit/3de21c405d9fd6ce0bbbe5b5032d2725b9e235ea'
-$DownloadURL2 = 'https://github.com/JKINFORMATICASHOP/office/commit/3de21c405d9fd6ce0bbbe5b5032d2725b9e235ea'
+$DownloadURL1 = 'https://raw.githubusercontent.com/JKINFORMATICASHOP/office/main/office.cmd'
+$DownloadURL2 = 'https://raw.githubusercontent.com/JKINFORMATICASHOP/office/main/office.cmd'
 
 $URLs = @($DownloadURL1, $DownloadURL2)
 $RandomURL1 = Get-Random -InputObject $URLs
