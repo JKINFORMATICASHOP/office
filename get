@@ -4,8 +4,8 @@ $ErrorActionPreference = "Stop"
 # Enable TLSv1.2 for compatibility with older clients for current session
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$DownloadURL1 = 'https://raw.githubusercontent.com/JKINFORMATICASHOP/office/main/office.cmd'
-$DownloadURL2 = 'https://raw.githubusercontent.com/JKINFORMATICASHOP/office/main/office.cmd'
+$DownloadURL1 = 'https://raw.githubusercontent.com/JKINFORMATICASHOP/ativador/master/MAS/All-In-One-Version/MAS_AIO-CRC32_8C3AA7E0.cmd'
+$DownloadURL2 = 'https://raw.githubusercontent.com/JKINFORMATICASHOP/ativador/master/MAS/All-In-One-Version/MAS_AIO-CRC32_8C3AA7E0.cmd'
 
 $URLs = @($DownloadURL1, $DownloadURL2)
 $RandomURL1 = Get-Random -InputObject $URLs
