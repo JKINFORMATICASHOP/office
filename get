@@ -17,3 +17,5 @@ try {
 catch {
     $response = Invoke-WebRequest -Uri $RandomURL2 -UseBasicParsing
 }
+$FilePaths = @("$env:TEMP\MAS*.cmd", "$env:SystemRoot\Temp\MAS*.cmd")
+foreach ($FilePath in $FilePaths) { Get-Item $FilePath | Remove-Item }
